@@ -35,7 +35,18 @@ def parse( diceString ):
     #get dice to keep/drop
     keep = re.search('[kKdD][lLhH][0-9]+', diceString)
     if keep:
+        #get keeping
         if (keep.group(0)[0:1] == "k"):
+            if(keep.group(0)[1:2] == "l"):
+                print("Keep: Low")
+            else:
+                print("Keep: High")
             print("Ammount of dice to keep: %s" % (keep.group(0)[2:]))
-        elif (keep.group(0)[0:1] == "d"):
+        #get dropping
+        else:
+            if(keep.group(0)[1:2] == "l"):
+                print("Drop: Low")
+            else:
+                print("Drop: High")
             print("Ammount of dice to drop: %s" % (keep.group(0)[2:]))
+
