@@ -1,3 +1,3 @@
 #!/usr/bin/env python3
 
-import scripts.diceParser
+from scripts import diceParser
