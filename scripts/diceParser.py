@@ -16,4 +16,4 @@ def parse( diceString ):
     #get dice to keep/drop
     keep = re.search('[kKdD][lLhH][0-9]+', diceString)
     if keep:
-        print(mod.group(0))
+        print(keep.group(0))
