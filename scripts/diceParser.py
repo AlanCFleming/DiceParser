@@ -4,7 +4,7 @@ import re
 
 def parse( diceString ):
     #get dice ammount and type
-    dice = re.search('[0-9]*d[0-9]+', diceString)
+    dice = re.search('[0-9]*[dD][0-9]+', diceString)
     if dice:
         print(dice.group(0))
 
