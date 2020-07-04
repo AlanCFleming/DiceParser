@@ -9,6 +9,9 @@ def parse( diceString ):
         print("The provided input must be a string")
         return
 
+    #strips trailing and leading whitespace from input
+    diceString = diceString.strip()
+
     #check if valid string
     if not re.match('[0-9]*[dD][0-9]+\s*([+-][0-9]*)?\s*([kKdD][lLhH][0-9]*)?', diceString):
         print("The privided string is not a valid dice role")
