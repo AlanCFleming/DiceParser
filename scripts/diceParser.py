@@ -3,10 +3,15 @@
 import re
 
 def parse( diceString ):
-    #get dice ammount and type
-    dice = re.search('[0-9]*[dD][0-9]+', diceString)
-    if dice:
-        print(dice.group(0))
+    #get the type of dice
+    sides = re.search('[dD][0-9]+', diceString)
+    if sides:
+        print(sides.group(0))
+
+    #get the ammount of dice
+    ammount = re.search('[0-9]+[dD]', diceString)
+    if ammount:
+        print(ammount.group(0))
 
     #get roll modifier
     mod = re.search('[\+\-][0-9]+', diceString)
