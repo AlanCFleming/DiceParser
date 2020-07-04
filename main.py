@@ -2,4 +2,4 @@
 
 from scripts import diceParser
 
-diceParser.parse("hello")
+diceParser.parse("5d6 +2")
