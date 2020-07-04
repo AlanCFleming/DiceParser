@@ -13,8 +13,8 @@ def parse( diceString ):
     diceString = diceString.strip().lower()
 
     #check if valid string
-    if not re.match('^[0-9]*[dD][0-9]+\s*([+-][0-9]*)?\s*([kKdD][lLhH][0-9]*)?$', diceString):
-        print("The privided string is not a valid dice role")
+    if not re.match('^[0-9]*[dD][1-9][0-9]*\s*([+-][0-9]*)?\s*([kKdD][lLhH][0-9]*)?$', diceString):
+        print("The provided string is not a valid dice role")
         return
 
     #get the ammount of dice
@@ -49,4 +49,3 @@ def parse( diceString ):
             else:
                 print("Drop: High")
             print("Ammount of dice to drop: %s" % (keep.group(0)[2:]))
-
