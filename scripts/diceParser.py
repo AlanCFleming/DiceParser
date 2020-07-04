@@ -17,16 +17,16 @@ def parse( diceString ):
         print("The privided string is not a valid dice role")
         return
 
-    #get the type of dice
-    sides = re.search('[dD][0-9]+', diceString)
-    if sides:
-        print(sides.group(0))
-
     #get the ammount of dice
     ammount = re.search('[0-9]+[dD]', diceString)
     if ammount:
         print(ammount.group(0))
 
+    #get the type of dice
+    sides = re.search('[dD][0-9]+', diceString)
+    if sides:
+        print(sides.group(0))
+    
     #get roll modifier
     mod = re.search('[\+\-][0-9]+', diceString)
     if mod:
