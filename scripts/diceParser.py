@@ -10,7 +10,7 @@ def parse( diceString ):
         return
 
     #strips trailing and leading whitespace from input
-    diceString = diceString.strip()
+    diceString = diceString.strip().lower()
 
     #check if valid string
     if not re.match('^[0-9]*[dD][0-9]+\s*([+-][0-9]*)?\s*([kKdD][lLhH][0-9]*)?$', diceString):
@@ -20,12 +20,12 @@ def parse( diceString ):
     #get the ammount of dice
     ammount = re.search('[0-9]+[dD]', diceString)
     if ammount:
-        print("Number of dice: %s" % (ammount.group(0)))
+        print("Number of dice: %s" % (ammount.group(0)[:-1]))
 
     #get the type of dice
     sides = re.search('[dD][0-9]+', diceString)
     if sides:
-        print("Number of sides: %s" % (sides.group(0)))
+        print("Number of sides: %s" % (sides.group(0)[1:]))
     
     #get roll modifier
     mod = re.search('[\+\-][0-9]+', diceString)
@@ -35,4 +35,7 @@ def parse( diceString ):
     #get dice to keep/drop
     keep = re.search('[kKdD][lLhH][0-9]+', diceString)
     if keep:
-        print("Ammount of dice to keep/drop: %s" % (keep.group(0)))
+        if (keep.group(0)[0:1] == "k"):
+            print("Ammount of dice to keep: %s" % (keep.group(0)[2:]))
+        elif (keep.group(0)[0:1] == "d"):
+            print("Ammount of dice to drop: %s" % (keep.group(0)[2:]))
