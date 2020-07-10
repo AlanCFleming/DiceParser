@@ -69,6 +69,7 @@ def parse( diceString ):
             drop = True
     else:
         keep = False
+        drop = False
         keepDropAmmount = 0
 
     #print(ammount, sides, mod, keep, drop, high, keepDropAmmount)
