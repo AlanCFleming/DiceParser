@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+#module functions
 import re
 import random
 
@@ -77,6 +78,10 @@ def parse( diceString ):
         high = False
         keepDropAmmount = 0
 
+    if(drop or keep and keepDropAmmount > ammount):
+        print("Too many dice kept/dropped: Keeping/Dropping all dice")
+        keepDropAmmount = ammount
+
     #print(ammount, sides, mod, keep, drop, high, keepDropAmmount)
     #roll parsed dice
     roll(ammount, sides, mod, keep, drop, high, keepDropAmmount)
@@ -118,6 +123,20 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
     else:
         print(rollList, (sum(rollList)+modifier))
         return (rollList, (sum(rollList)+modifier), [])
-
     
 
+
+#Main function to runn if file is called directly
+if __name__ == '__main__':
+    diceString = ''
+    while(True):
+        #get the users input
+        print("Please input the dice you want to roll:")
+        diceString = input().lower()
+        #exit program on input being exit
+        if (diceString == "exit"):
+            break
+        #pass input to parser
+        parse(diceString)
+        #line brike for rolls
+        print("\n--------------------------------------------\n")
