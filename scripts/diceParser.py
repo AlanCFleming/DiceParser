@@ -73,12 +73,18 @@ def parse( diceString ):
         keepDropAmmount = 0
 
     #print(ammount, sides, mod, keep, drop, high, keepDropAmmount)
+    #roll parsed dice
+    roll(ammount, sides, mod, keep, drop, high, keepDropAmmount)
 
 def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keepDropAmmount = 0):
 
+    #initialize list
     rollList = []
 
+    #generate all rolls
     for i in range(0, ammount):
         rollList.append(random.randint(1 , sides))
 
-    print(rollList.sort())
+    print(sorted(rollList))
+
+
