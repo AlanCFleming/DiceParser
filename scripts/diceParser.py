@@ -93,6 +93,28 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
     #sort the rolls
     rollList = sorted(rollList) if high else sorted(rollList, reverse=True)
 
-    print(rollList, sum(rollList))
+    if(keep):
+        #initialize list of rolls to keep
+        keepList = []
+        #pull out rolls to keep
+        for i in range(0, keepDropAmmount):
+            keepList.append(rollList.pop())
+        #print adjusted rolls
+        print("Kept dice: ", keepList)
+        print("Discarded Dice: ", rollList)
+        print("Total: ", (sum(keepList)+modifier))
+    elif(drop):
+        #initialize list of rolls to keep
+        dropList = []
+        #pull out rolls to keep
+        for i in range(0, keepDropAmmount):
+            dropList.append(rollList.pop())
+        #print adjusted rolls
+        print("Kept dice: ", rollList)
+        print("Discarded Dice: ", dropList)
+        print("Total: ", (sum(rollList)+modifier))
+    else:
+        print(rollList, (sum(rollList)+modifier))
+
     
 
