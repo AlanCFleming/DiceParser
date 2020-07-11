@@ -103,6 +103,7 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
         print("Kept dice: ", keepList)
         print("Discarded Dice: ", rollList)
         print("Total: ", (sum(keepList)+modifier))
+        return (keepList, (sum(keepList)+modifier), rollList)
     elif(drop):
         #initialize list of rolls to keep
         dropList = []
@@ -113,8 +114,10 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
         print("Kept dice: ", rollList)
         print("Discarded Dice: ", dropList)
         print("Total: ", (sum(rollList)+modifier))
+        return (rollList, (sum(rollList)+modifier), dropList)
     else:
         print(rollList, (sum(rollList)+modifier))
+        return (rollList, (sum(rollList)+modifier))
 
     
 
