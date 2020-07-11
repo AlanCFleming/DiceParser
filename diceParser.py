@@ -138,3 +138,5 @@ if __name__ == '__main__':
             break
         #pass input to parser
         parse(diceString)
+        #line brike for rolls
+        print("\n--------------------------------------------\n")
