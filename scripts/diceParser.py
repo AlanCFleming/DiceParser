@@ -117,7 +117,7 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
         return (rollList, (sum(rollList)+modifier), dropList)
     else:
         print(rollList, (sum(rollList)+modifier))
-        return (rollList, (sum(rollList)+modifier))
+        return (rollList, (sum(rollList)+modifier), [])
 
     
 
