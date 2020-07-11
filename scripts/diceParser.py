@@ -23,6 +23,8 @@ def parse( diceString ):
     if ammount:
         print("Number of dice: %s" % (ammount.group(0)[:-1]))
         ammount = int(ammount.group(0)[:-1])
+    else:
+        ammount = 1;
 
     #get the type of dice
     sides = re.search('[dD][0-9]+', diceString)
@@ -35,6 +37,8 @@ def parse( diceString ):
     if mod:
         print("Modifier for roll: %s" % (mod.group(0)))
         mod = int(mod.group(0))
+    else:
+        mod = 0
     
     #get dice to keep/drop
     keep = re.search('[kKdD][lLhH][0-9]+', diceString)
@@ -86,6 +90,9 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
     for i in range(0, ammount):
         rollList.append(random.randint(1 , sides))
 
-    print(sorted(rollList), sum(rollList))
+    #sort the rolls
+    rollList = sorted(rollList) if high else sorted(rollList, reverse=True)
+
+    print(rollList, sum(rollList))
     
 
