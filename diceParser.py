@@ -78,6 +78,10 @@ def parse( diceString ):
         high = False
         keepDropAmmount = 0
 
+    if(drop or keep and keepDropAmmount > ammount):
+        print("Too many dice kept/dropped: Keeping/Dropping all dice")
+        keepDropAmmount = ammount
+
     #print(ammount, sides, mod, keep, drop, high, keepDropAmmount)
     #roll parsed dice
     roll(ammount, sides, mod, keep, drop, high, keepDropAmmount)
