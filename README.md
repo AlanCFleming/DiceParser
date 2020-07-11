@@ -6,6 +6,8 @@ This dice roller is built with python 3 and utalizes regex.
 
 diceParser.py can be used to run the program.
 
+type "exit" to stop rolling dice
+
 ## Sample Inputs
 - 5d6
 - 2d4 +4
