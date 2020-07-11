@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 
+#module functions
 import re
 import random
 
@@ -118,6 +119,18 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
     else:
         print(rollList, (sum(rollList)+modifier))
         return (rollList, (sum(rollList)+modifier), [])
-
     
 
+
+#Main function to runn if file is called directly
+if __name__ == '__main__':
+    diceString = ''
+    while(True):
+        #get the users input
+        print("Please input the dice you want to roll:")
+        diceString = input().lower()
+        #exit program on input being exit
+        if (diceString == "exit"):
+            break
+        #pass input to parser
+        parse(diceString)

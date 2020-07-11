@@ -4,7 +4,7 @@ This is a text based dice roll parser.
 
 This dice roller is built with python 3 and utalizes regex.
 
-main.py can be used to run the program.
+diceParser.py can be used to run the program.
 
 ## Sample Inputs
 - 5d6
