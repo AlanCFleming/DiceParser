@@ -70,6 +70,7 @@ def parse( diceString ):
     else:
         keep = False
         drop = False
+        high = False
         keepDropAmmount = 0
 
     #print(ammount, sides, mod, keep, drop, high, keepDropAmmount)
@@ -85,6 +86,6 @@ def roll(ammount, sides, modifier, keep = False, drop = False, high = True, keep
     for i in range(0, ammount):
         rollList.append(random.randint(1 , sides))
 
-    print(sorted(rollList))
-
+    print(sorted(rollList), sum(rollList))
+    
 
