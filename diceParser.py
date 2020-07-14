@@ -4,19 +4,21 @@ import re
 import random
 
 
-def parse(diceString):
+def parse(diceString, verbose = False):
     # Check if diceString is a string
     if not isinstance(diceString, str):
-        print("The provided input must be a string")
-        return
+        if( verbose ):
+            print("The provided input must be a string")
+        return -1
 
     # Strips trailing and leading whitespace from input
     diceString = diceString.strip().lower()
 
     # Check if valid string
     if not re.match('^[0-9]*[dD][1-9][0-9]*\s*([+-][0-9]*)?\s*([kKdD][lLhH][0-9]*)?$', diceString):
-        print("The provided string is not a valid dice role")
-        return
+        if( verbose ):
+            print("The provided string is not a valid dice role")
+        return -1
 
     # Get the amount of dice
     amount = re.search('[0-9]+[dD]', diceString)
@@ -83,7 +85,8 @@ def parse(diceString):
         keep_drop_amount = 0
 
     if(drop or keep and keep_drop_amount > amount):
-        print("Too many dice kept/dropped: Keeping/Dropping all dice")
+        if( verbose ):
+            print("Too many dice kept/dropped: Keeping/Dropping all dice")
         keep_drop_amount = amount
 
     # Roll parsed dice
