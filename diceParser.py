@@ -49,7 +49,7 @@ def parse(diceString):
     keep = re.search('[kKdD][lLhH][0-9]+', diceString)
     if keep:
         # Get amount to keep/drop
-        keepDropamount = int(keep.group(0)[2:])
+        keep_drop_amount = int(keep.group(0)[2:])
         # Get keeping
         if (keep.group(0)[0:1] == "k"):
             # Get high/low
@@ -80,17 +80,17 @@ def parse(diceString):
         keep = False
         drop = False
         high = False
-        keepDropamount = 0
+        keep_drop_amount = 0
 
-    if(drop or keep and keepDropamount > amount):
+    if(drop or keep and keep_drop_amount > amount):
         print("Too many dice kept/dropped: Keeping/Dropping all dice")
-        keepDropamount = amount
+        keep_drop_amount = amount
 
     # Roll parsed dice
-    roll(amount, sides, mod, keep, drop, high, keepDropamount)
+    roll(amount, sides, mod, keep, drop, high, keep_drop_amount)
 
 
-def roll(amount, sides, modifier, keep=False, drop=False, high=True, keepDropamount=0):
+def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_amount=0):
     # Initialize list
     rollList = []
 
@@ -105,7 +105,7 @@ def roll(amount, sides, modifier, keep=False, drop=False, high=True, keepDropamo
         # Initialize list of rolls to keep
         keepList = []
         # Pull out rolls to keep
-        for i in range(0, keepDropamount):
+        for i in range(0, keep_drop_amount):
             keepList.append(rollList.pop())
         # Print adjusted rolls
         print("Kept dice: ", keepList)
@@ -116,7 +116,7 @@ def roll(amount, sides, modifier, keep=False, drop=False, high=True, keepDropamo
         # Initialize list of rolls to keep
         dropList = []
         # Pull out rolls to keep
-        for i in range(0, keepDropamount):
+        for i in range(0, keep_drop_amount):
             dropList.append(rollList.pop())
         # Print adjusted rolls
         print("Kept dice: ", rollList)
