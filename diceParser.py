@@ -23,7 +23,6 @@ def parse(diceString, verbose = False):
     # Get the amount of dice
     amount = re.search('[0-9]+[dD]', diceString)
     if amount:
-        print("Number of dice: %s" % (amount.group(0)[:-1]))
         amount = int(amount.group(0)[:-1])
     else:
         amount = 1
@@ -36,13 +35,11 @@ def parse(diceString, verbose = False):
     # Get the type of dice
     sides = re.search('[dD][0-9]+', diceString)
     if sides:
-        print("Number of sides: %s" % (sides.group(0)[1:]))
         sides = int(sides.group(0)[1:])
 
     # Get roll modifier
     mod = re.search('[\+\-][0-9]+', diceString)
     if mod:
-        print("Modifier for roll: %s" % (mod.group(0)))
         mod = int(mod.group(0))
     else:
         mod = 0
@@ -54,30 +51,30 @@ def parse(diceString, verbose = False):
         keep_drop_amount = int(keep.group(0)[2:])
         # Get keeping
         if (keep.group(0)[0:1] == "k"):
+            
             # Get high/low
             if(keep.group(0)[1:2] == "l"):
-                print("Keep: Low")
-                highi = False
+                high = False
             else:
-                print("Keep: High")
                 high = True
-            print("amount of dice to keep: %s" % (keep.group(0)[2:]))
+
             # Set keep/drop
             keep = True
             drop = False
+        
         # Get dropping
         else:
+            
             # Get high/low
             if(keep.group(0)[1:2] == "l"):
-                print("Drop: Low")
                 high = False
             else:
-                print("Drop: High")
                 high = True
-            print("amount of dice to drop: %s" % (keep.group(0)[2:]))
+
             # Set keep/drop
             keep = False
             drop = True
+
     else:
         keep = False
         drop = False
@@ -94,6 +91,7 @@ def parse(diceString, verbose = False):
 
     # Return results of parsing
     return(amount, sides, mod, keep, drop, high, keep_drop_amount)
+
 
 def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_amount=0):
     # Initialize list
@@ -144,6 +142,24 @@ if __name__ == '__main__':
         if (diceString == "exit"):
             break
         # Pass input to parser
-        parse(diceString)
+        amount , sides , modifier , keep , drop , high , keep_drop_amount = parse(diceString)
+
+        # Print parcing results
+        print("Number of dice: %s" % (amount))
+        print("Number of sides: %s" % (sides))
+        print("Modifier for roll: %s" % (modifier))
+
+        if( keep and high ):
+            print("Keep: High")
+        elif( keep and not high ):
+            print("Keep: Low")
+        elif( drop and high ):
+            print("Drop: High")
+        elif( drop and not high ):
+            print("Drop: Low")
+
+        if( keep or drop ):
+            print("amount of dice to keep: %s" % (keep_drop_amount))
+
         # Line brake for rolls
         print("\n--------------------------------------------\n")
