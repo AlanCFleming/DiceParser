@@ -26,6 +26,11 @@ def parse(diceString):
     else:
         amount = 1
 
+    # Don't roll more than 10,000 dice
+    if amount > 10000:
+        print("Too many dice, exiting")
+        return
+
     # Get the type of dice
     sides = re.search('[dD][0-9]+', diceString)
     if sides:
