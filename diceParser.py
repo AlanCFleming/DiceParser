@@ -55,7 +55,7 @@ def parse(diceString):
             # Get high/low
             if(keep.group(0)[1:2] == "l"):
                 print("Keep: Low")
-                high = False
+                highi = False
             else:
                 print("Keep: High")
                 high = True
@@ -89,6 +89,8 @@ def parse(diceString):
     # Roll parsed dice
     roll(amount, sides, mod, keep, drop, high, keep_drop_amount)
 
+    # Return results of parsing
+    return(amount, sides, mod, keep, drop, high, keep_drop_amount)
 
 def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_amount=0):
     # Initialize list
