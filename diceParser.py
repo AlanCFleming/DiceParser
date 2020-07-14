@@ -86,9 +86,6 @@ def parse(diceString, verbose = False):
             print("Too many dice kept/dropped: Keeping/Dropping all dice")
         keep_drop_amount = amount
 
-    # Roll parsed dice
-    roll(amount, sides, mod, keep, drop, high, keep_drop_amount)
-
     # Return results of parsing
     return(amount, sides, mod, keep, drop, high, keep_drop_amount)
 
@@ -105,27 +102,28 @@ def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_a
     rollList = sorted(rollList) if high else sorted(rollList, reverse=True)
 
     if(keep):
+        
         # Initialize list of rolls to keep
         keepList = []
+
         # Pull out rolls to keep
         for i in range(0, keep_drop_amount):
             keepList.append(rollList.pop())
+        
         # Print adjusted rolls
-        print("Kept dice: ", keepList)
-        print("Discarded Dice: ", rollList)
-        print("Total: ", (sum(keepList) + modifier))
         return (keepList, (sum(keepList) + modifier), rollList)
     elif(drop):
+        
         # Initialize list of rolls to keep
         dropList = []
+        
         # Pull out rolls to keep
         for i in range(0, keep_drop_amount):
             dropList.append(rollList.pop())
+        
         # Print adjusted rolls
-        print("Kept dice: ", rollList)
-        print("Discarded Dice: ", dropList)
-        print("Total: ", (sum(rollList) + modifier))
         return (rollList, (sum(rollList) + modifier), dropList)
+    
     else:
         print(rollList, (sum(rollList) + modifier))
         return (rollList, (sum(rollList) + modifier), [])
@@ -160,6 +158,15 @@ if __name__ == '__main__':
 
         if( keep or drop ):
             print("amount of dice to keep: %s" % (keep_drop_amount))
+
+        # Rolled parsed dice
+        keep_list , roll_list , total = roll( amount , sides , modifier , keep , drop , high , keep_drop_amount )
+
+        # Print roll results
+        print("Kept dice: %s" % (keep_list))
+        print("Discarded Dice: %s" % (roll_list))
+        print("Total: %s" % (total))
+
 
         # Line brake for rolls
         print("\n--------------------------------------------\n")
