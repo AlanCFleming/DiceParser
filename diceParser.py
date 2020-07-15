@@ -138,13 +138,17 @@ def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_a
 if __name__ == '__main__':
     diceString = ''
     while(True):
+        # Line brake for rolls
+        print("\n--------------------------------------------\n")
+
         # Get the users input
         print("Please input the dice you want to roll:")
         diceString = input().lower()
         # Exit program on input being exit
         if (diceString == "exit"):
             break
- 
+        if (diceString == "timeout"):
+            continue
         # Pass input to parser
         output = parse( diceString, True )
 
@@ -185,6 +189,3 @@ if __name__ == '__main__':
                 #print the error message
                 print("The dice took too long to roll")
 
-
-        # Line brake for rolls
-        print("\n--------------------------------------------\n")
