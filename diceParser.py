@@ -76,7 +76,7 @@ def parse(diceString, verbose = False):
         high = False
         keep_drop_amount = 0
 
-    if(drop or keep and keep_drop_amount > amount):
+    if((drop or keep) and keep_drop_amount > amount):
         if( verbose ):
             print("Too many dice kept/dropped: Keeping/Dropping all dice")
         keep_drop_amount = amount
