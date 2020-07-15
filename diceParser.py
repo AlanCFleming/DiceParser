@@ -167,7 +167,8 @@ if __name__ == '__main__':
 
         # Rolled parsed dice
         output = roll( amount , sides , modifier , keep , drop , high , keep_drop_amount , 30)
-
+        
+        # Check if the dice was rolled successfully
         if( isinstance( output , tuple )):
             #break apart tuple output
             keep_list , roll_list , total = output
@@ -177,6 +178,7 @@ if __name__ == '__main__':
             print("Discarded Dice: %s" % (roll_list))
             print("Total: %s" % (total))
         else:
+            #print the error message
             print("The dice took too long to roll")
 
 
