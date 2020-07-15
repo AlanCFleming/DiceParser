@@ -131,7 +131,6 @@ def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_a
         return (roll_list, (sum(roll_list) + modifier), dropList)
     
     else:
-        print(roll_list, (sum(roll_list) + modifier))
         return (roll_list, (sum(roll_list) + modifier), [])
 
 
@@ -145,41 +144,46 @@ if __name__ == '__main__':
         # Exit program on input being exit
         if (diceString == "exit"):
             break
+ 
         # Pass input to parser
-        amount , sides , modifier , keep , drop , high , keep_drop_amount = parse(diceString)
+        output = parse( diceString, True )
 
-        # Print parcing results
-        print("Number of dice: %s" % (amount))
-        print("Number of sides: %s" % (sides))
-        print("Modifier for roll: %s" % (modifier))
-
-        if( keep and high ):
-            print("Keep: High")
-        elif( keep and not high ):
-            print("Keep: Low")
-        elif( drop and high ):
-            print("Drop: High")
-        elif( drop and not high ):
-            print("Drop: Low")
-
-        if( keep or drop ):
-            print("amount of dice to keep: %s" % (keep_drop_amount))
-
-        # Rolled parsed dice
-        output = roll( amount , sides , modifier , keep , drop , high , keep_drop_amount , 30)
-        
-        # Check if the dice was rolled successfully
+        #Check if parse finished properly 
         if( isinstance( output , tuple )):
-            #break apart tuple output
-            keep_list , roll_list , total = output
+            amount , sides , modifier , keep , drop , high , keep_drop_amount = output
+
+            # Print parcing results
+            print("Number of dice: %s" % (amount))
+            print("Number of sides: %s" % (sides))
+            print("Modifier for roll: %s" % (modifier))
+
+            if( keep and high ):
+                print("Keep: High")
+            elif( keep and not high ):
+                print("Keep: Low")
+            elif( drop and high ):
+                print("Drop: High")
+            elif( drop and not high ):
+                print("Drop: Low")
+
+            if( keep or drop ):
+                print("Amount of dice to keep: %s" % (keep_drop_amount))
+
+            # Rolled parsed dice
+            output = roll( amount , sides , modifier , keep , drop , high , keep_drop_amount , 30)
             
-            # Print roll results
-            print("Kept dice: %s" % (keep_list))
-            print("Discarded Dice: %s" % (roll_list))
-            print("Total: %s" % (total))
-        else:
-            #print the error message
-            print("The dice took too long to roll")
+            # Check if the dice was rolled successfully
+            if( isinstance( output , tuple )):
+                #break apart tuple output
+                keep_list , roll_list , total = output
+                
+                # Print roll results
+                print("Kept dice: %s" % (keep_list))
+                print("Discarded Dice: %s" % (roll_list))
+                print("Total: %s" % (total))
+            else:
+                #print the error message
+                print("The dice took too long to roll")
 
 
         # Line brake for rolls
