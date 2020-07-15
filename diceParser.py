@@ -2,7 +2,7 @@
 
 import re
 import random
-
+import time
 
 def parse(diceString, verbose = False):
     # Check if diceString is a string
@@ -26,11 +26,6 @@ def parse(diceString, verbose = False):
         amount = int(amount.group(0)[:-1])
     else:
         amount = 1
-
-    # Don't roll more than 10,000 dice
-    if amount > 10000:
-        print("Too many dice, exiting")
-        return
 
     # Get the type of dice
     sides = re.search('[dD][0-9]+', diceString)
@@ -90,28 +85,39 @@ def parse(diceString, verbose = False):
     return(amount, sides, mod, keep, drop, high, keep_drop_amount)
 
 
-def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_amount=0):
+def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_amount=0 , time_out = 10):
     # Initialize list
-    rollList = []
+    roll_list = []
+
+    # Calculate timeout time
+    time_out = time_out + time.time()
 
     # Generate all rolls
     for i in range(0, amount):
-        rollList.append(random.randint(1, sides))
+        
+        # Return error if timeout is reached
+        if( time.time() > time_out):
+            return -1
+        
+        # Append to roll list otherwise 
+        roll_list.append(random.randint(1, sides))
+
 
     # Sort the rolls
-    rollList = sorted(rollList) if high else sorted(rollList, reverse=True)
+    roll_list = sorted(roll_list) if high else sorted(roll_list, reverse=True)
+
 
     if(keep):
         
         # Initialize list of rolls to keep
-        keepList = []
+        keep_list = []
 
         # Pull out rolls to keep
         for i in range(0, keep_drop_amount):
-            keepList.append(rollList.pop())
+            keep_list.append(roll_list.pop())
         
         # Print adjusted rolls
-        return (keepList, (sum(keepList) + modifier), rollList)
+        return (keep_list, (sum(keep_list) + modifier), roll_list)
     elif(drop):
         
         # Initialize list of rolls to keep
@@ -119,14 +125,14 @@ def roll(amount, sides, modifier, keep=False, drop=False, high=True, keep_drop_a
         
         # Pull out rolls to keep
         for i in range(0, keep_drop_amount):
-            dropList.append(rollList.pop())
+            dropList.append(roll_list.pop())
         
         # Print adjusted rolls
-        return (rollList, (sum(rollList) + modifier), dropList)
+        return (roll_list, (sum(roll_list) + modifier), dropList)
     
     else:
-        print(rollList, (sum(rollList) + modifier))
-        return (rollList, (sum(rollList) + modifier), [])
+        print(roll_list, (sum(roll_list) + modifier))
+        return (roll_list, (sum(roll_list) + modifier), [])
 
 
 # Main function to run if file is called directly
@@ -160,12 +166,18 @@ if __name__ == '__main__':
             print("amount of dice to keep: %s" % (keep_drop_amount))
 
         # Rolled parsed dice
-        keep_list , roll_list , total = roll( amount , sides , modifier , keep , drop , high , keep_drop_amount )
+        output = roll( amount , sides , modifier , keep , drop , high , keep_drop_amount , 30)
 
-        # Print roll results
-        print("Kept dice: %s" % (keep_list))
-        print("Discarded Dice: %s" % (roll_list))
-        print("Total: %s" % (total))
+        if( isinstance( output , tuple )):
+            #break apart tuple output
+            keep_list , roll_list , total = output
+            
+            # Print roll results
+            print("Kept dice: %s" % (keep_list))
+            print("Discarded Dice: %s" % (roll_list))
+            print("Total: %s" % (total))
+        else:
+            print("The dice took too long to roll")
 
 
         # Line brake for rolls
